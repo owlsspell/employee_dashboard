@@ -1,17 +1,17 @@
 import express from "express";
 const app = express();
 const port = 5005;
-import cors from "cors";
+// import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
-const corsOptions = {
-  origin: 'https://employee-dashboard-ecru.vercel.app/',
-  optionSuccessStatus: 200,
-}
+// const corsOptions = {
+//   origin: 'https://employee-dashboard-ecru.vercel.app/',
+//   optionSuccessStatus: 200,
+// }
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 
 const prisma = new PrismaClient();
 
@@ -26,10 +26,6 @@ app.get('/getEmployees', async (req, res) => {
 
 app.post("/createReport", async (req, res) => {
   const employee = req.body;
-  console.log(Object.keys(employee).join());
-  console.log(Object.values(employee).join());
-  const columns = Object.keys(employee).join();
-  const values = Object.values(employee).join()
 
   // await sql`SELECT * from CARTS where user_id=${params.user}`;
   // await sql`INSERT INTO Employees (${columns}) VALUES (${values});`;
