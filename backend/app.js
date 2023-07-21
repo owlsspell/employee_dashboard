@@ -8,8 +8,9 @@ import path from "path";
 import cors from "cors";
 
 const corsOptions = {
-  origin: 'https://employee-dashboard-ecru.vercel.app/',        //access-control-allow-credentials:true
-  // optionSuccessStatus: 200,
+  origin: 'https://employee-dashboard-ecru.vercel.app/',
+  credentials: true,
+  optionSuccessStatus: 200,
 }
 
 app.use(express.json({ limit: "50mb" }));
