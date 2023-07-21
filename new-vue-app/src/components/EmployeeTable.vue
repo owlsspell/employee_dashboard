@@ -1,0 +1,52 @@
+<script setup>
+import users from "../users.json";
+
+defineProps({
+  setOpen: Function,
+});
+
+const headers = [
+  "id",
+  "name",
+  "email",
+  "gender",
+  "job",
+  "company",
+  "country",
+  "date",
+];
+</script>
+
+<template>
+  <main>
+    <div class="mx-auto max-w-7xl pb-6" v-if="users.length > 0">
+      <div class="overflow-x-auto">
+        <table class="table table-xs">
+          <thead>
+            <tr>
+              <th v-for="header in headers" :key="header">{{ header }}</th>
+            </tr>
+          </thead>
+          <tbody v-for="user in users" :key="user.id">
+            <tr>
+              <td v-for="header in headers" :key="user.id + ' ' + header">
+                {{ user[header] }}
+              </td>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Job</th>
+              <th>company</th>
+              <th>location</th>
+              <th>Last Login</th>
+              <th>Favorite Color</th>
+            </tr>
+          </tfoot> -->
+        </table>
+      </div>
+    </div>
+  </main>
+</template>
