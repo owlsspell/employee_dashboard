@@ -5,7 +5,7 @@ import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
 const corsOptions = {
-  origin: 'https://employee-dashboard-ecru.vercel.app/',
+  origin: 'https://employee-dashboard-ecru.vercel.app/*',
   optionSuccessStatus: 200,
 }
 
