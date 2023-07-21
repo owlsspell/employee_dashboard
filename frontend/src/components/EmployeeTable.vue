@@ -1,5 +1,7 @@
 <script setup>
-import users from "../users.json";
+import { useQuery } from "@tanstack/vue-query";
+import { base } from "../../config";
+import { onMounted } from "vue";
 
 defineProps({
   setOpen: Function,
@@ -15,19 +17,36 @@ const headers = [
   "country",
   "date",
 ];
+
+const fetcher = async () =>
+  await fetch(base + "getEmployees").then((response) =>
+    response.json(response)
+  );
+
+onMounted(() => {
+  fetcher();
+});
+
+const { isLoading, isError, data, error } = useQuery({
+  queryKey: ["employees"],
+  queryFn: fetcher,
+});
 </script>
 
 <template>
   <main>
-    <div class="mx-auto max-w-7xl pb-6" v-if="users.length > 0">
+    <div v-if="isLoading">Loading...</div>
+    <div class="mx-auto max-w-7xl pb-6" v-if="data && data.length > 0">
       <div class="overflow-x-auto">
         <table class="table table-xs">
           <thead>
             <tr>
-              <th v-for="header in headers" :key="header">{{ header }}</th>
+              <th v-for="header in headers" :key="header">
+                {{ header === "id" ? "#" : header }}
+              </th>
             </tr>
           </thead>
-          <tbody v-for="user in users" :key="user.id">
+          <tbody v-for="user in data" :key="user.id">
             <tr>
               <td v-for="header in headers" :key="user.id + ' ' + header">
                 {{ user[header] }}

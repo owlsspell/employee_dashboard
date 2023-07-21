@@ -2,6 +2,7 @@
 import EmployeeTable from "../components/EmployeeTable.vue";
 import { ref } from "vue";
 import CreateReport from "../components/Employee/CreateReport.vue";
+
 const isOpen = ref(false);
 
 const setOpen = (value) => (isOpen.value = value);
