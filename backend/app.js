@@ -2,20 +2,18 @@ import express from "express";
 const app = express();
 const port = 5000;
 import { PrismaClient } from "@prisma/client";
-// const { sql } = require("@vercel/postgres")
-import { sql } from '@vercel/postgres';
 import path from "path";
-// import cors from "cors";
+import cors from "cors";
 
-// const corsOptions = {
-//   origin: 'https://employee-dashboard-ecru.vercel.app/',
-//   credentials: true,
-//   optionSuccessStatus: 200,
-// }
+const corsOptions = {
+  origin: 'https://employee-dashboard-ecru.vercel.app/',
+  credentials: true,
+  optionSuccessStatus: 200,
+}
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-// app.use(cors())
+app.use(cors(corsOptions))
 
 const prisma = new PrismaClient();
 
