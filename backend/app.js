@@ -9,17 +9,17 @@ import cors from "cors";
 
 const corsOptions = {
   origin: 'https://employee-dashboard-ecru.vercel.app/',        //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
+  // optionSuccessStatus: 200,
 }
 
-app.use(cors(corsOptions))
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(cors(corsOptions))
 
 const prisma = new PrismaClient();
 
 app.get('/', (req, res) => {
-  res.send('It is working!')
+  res.send("It is working!")
 })
 
 app.get('/getEmployees', async (req, res) => {
