@@ -1,17 +1,17 @@
 import express from "express";
 const app = express();
 const port = process.env.PORT || 5000;
-// import cors from "cors";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
-// const corsOptions = {
-//   origin: 'https://employee-dashboard-ecru.vercel.app/',
-//   optionSuccessStatus: 200,
-// }
+const corsOptions = {
+  origin: 'https://employee-dashboard-ecru.vercel.app/',
+  optionSuccessStatus: 200,
+}
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-// app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
 const prisma = new PrismaClient();
 
