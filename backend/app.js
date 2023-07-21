@@ -1,13 +1,11 @@
 import express from "express";
 const app = express();
 const port = 5005;
-import { PrismaClient } from "@prisma/client";
-import path from "path";
 import cors from "cors";
+import { PrismaClient } from "@prisma/client";
 
 const corsOptions = {
   origin: 'https://employee-dashboard-ecru.vercel.app/',
-  credentials: true,
   optionSuccessStatus: 200,
 }
 
