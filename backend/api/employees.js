@@ -3,28 +3,29 @@ const app = express();
 const port = process.env.PORT || 5000;
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
+const router = express.Router();
 
-const corsOptions = {
-  origin: '*',
-  optionSuccessStatus: 200,
-}
+// const corsOptions = {
+//   origin: '*',
+//   optionSuccessStatus: 200,
+// }
 
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use(cors(corsOptions))
+// app.use(express.json({ limit: "50mb" }));
+// app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+// app.use(cors(corsOptions))
 
 const prisma = new PrismaClient();
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.send("It is working!")
 })
 
-app.get('/getEmployees', async (req, res) => {
+router.get('/getEmployees', async (req, res) => {
   const employees = await prisma.employees.findMany()
   res.json(employees)
 })
 
-app.post("/createReport", async (req, res) => {
+router.post("/createReport", async (req, res) => {
   const employee = req.body;
 
   // await sql`SELECT * from CARTS where user_id=${params.user}`;
@@ -40,6 +41,9 @@ app.post("/createReport", async (req, res) => {
 //change data
 // await sql`UPDATE "Employees" SET name='Leo Yorkston' WHERE  id=1`
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port} `);
-});
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port} `);
+// });
+
+
+export default router

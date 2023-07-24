@@ -36,6 +36,7 @@ const { isLoading, isError, data, error } = useQuery({
 <template>
   <main>
     <div v-if="isLoading">Loading...</div>
+    <div v-if="isError">Something went wrong...</div>
     <div class="mx-auto max-w-7xl pb-6" v-if="data && data.length > 0">
       <div class="overflow-x-auto">
         <table class="table table-xs">

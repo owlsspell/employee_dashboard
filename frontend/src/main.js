@@ -6,4 +6,4 @@ import { VueQueryPlugin } from '@tanstack/vue-query'
 
 const app = createApp(App)
 app.use(router).use(VueQueryPlugin)
-app.mount('#app')
+router.isReady().then(() => app.mount('#app'));
