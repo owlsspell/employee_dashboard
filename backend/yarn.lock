@@ -219,11 +219,6 @@
   "resolved" "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
   "version" "0.0.1"
 
-"connect-history-api-fallback@^2.0.0":
-  "integrity" "sha512-U73+6lQFmfiNPrYbXqr6kZ1i1wiRqXnp2nhMsINseWXO8lDau0LGEffJ8kQi4EjLZympVgRdvqjAgiZ1tgzDDA=="
-  "resolved" "https://registry.npmjs.org/connect-history-api-fallback/-/connect-history-api-fallback-2.0.0.tgz"
-  "version" "2.0.0"
-
 "content-disposition@0.5.4":
   "integrity" "sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ=="
   "resolved" "https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.4.tgz"
