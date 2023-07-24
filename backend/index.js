@@ -24,10 +24,10 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cors(corsOptions))
 
 app.use('/api/', employees)
-app.use(history({
-  // index: '/index.js',
-  logger: console.log.bind(console)
-}));
+// app.use(history({
+//   // index: '/index.js',
+//   logger: console.log.bind(console)
+// }));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port} `);
