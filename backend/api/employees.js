@@ -1,7 +1,4 @@
 import express from "express";
-const app = express();
-const port = process.env.PORT || 5000;
-import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 const router = express.Router();
 
