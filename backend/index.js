@@ -5,9 +5,7 @@ import cors from "cors";
 import employees from "./api/employees.js"
 
 const whitelist = [
-  "https://employee-dashboard-neon.vercel.app",
-  "https://employee-dashboard-frontend-owlsspell.vercel.app",
-  "https://employee-dashboard-frontend-git-main-owlsspell.vercel.app"
+  process.env.VITE_FRONTEND_BASE
 ]
 
 const corsOptions = {

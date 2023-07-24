@@ -29,9 +29,9 @@ router.post("/createReport", async (req, res) => {
   // await sql`INSERT INTO Employees (${columns}) VALUES (${values});`;
 
   await prisma.employees.create({ data: employee })
-
+  console.log('employee', employee);
   // console.log('Created new user: ', newUser)
-  res.send(employee);
+  res.json(employee);
 });
 //creante a new emloyees
 // await sql`\COPY  Employees FROM '/tmp/data.csv' DELIMITER ',' CSV`
