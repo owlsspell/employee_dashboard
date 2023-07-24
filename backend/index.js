@@ -4,8 +4,14 @@ const port = process.env.PORT || 5000;
 import cors from "cors";
 import employees from "./api/employees.js"
 
+const whitelist = [
+  "https://employee-dashboard-neon.vercel.app",
+  "https://employee-dashboard-frontend-owlsspell.vercel.app",
+  "https://employee-dashboard-frontend-git-main-owlsspell.vercel.app"
+]
+
 const corsOptions = {
-  origin: '*',
+  origin: whitelist,
   optionSuccessStatus: 200,
 }
 
