@@ -7,7 +7,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "value": "https://employee-dashboard-neon.vercel.app"
         },
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         {
