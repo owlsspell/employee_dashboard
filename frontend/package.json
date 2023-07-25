@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formkit/themes": "^0.17.5",
+    "@formkit/vue": "^0.17.5",
     "@tanstack/vue-query": "^4.32.0",
     "axios": "^1.4.0",
     "theme-change": "^2.5.0",

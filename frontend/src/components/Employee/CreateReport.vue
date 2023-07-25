@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/vue-query";
 import { base } from "../../../config";
 import axios from "axios";
 import Modal from "../modal/Modal.vue";
+import Loading from "../modal/Loading.vue";
 
 let showModal = ref(false);
 
@@ -28,13 +29,10 @@ const { isLoading, isError, error, isSuccess, mutate } = useMutation({
     showModal.value = true;
   },
 });
-const createEmployee = async (data) => {
-  data = { ...data, date: Date.now().toString() };
-  mutate(toRaw(data));
-};
-
-const handleButton = () => {
-  createEmployee(employee);
+const createEmployee = async (fields) => {
+  fields = { ...fields, date: Date.now().toString() };
+  console.log("fields", fields);
+  mutate(fields);
 };
 </script>
 
@@ -46,23 +44,40 @@ const handleButton = () => {
       :status="{ isError, error, isSuccess }"
     />
   </div>
+  <div v-else-if="isLoading">
+    <Loading :showModal="isLoading" />
+  </div>
   <main>
     <div
       class="relative flex flex-col items-center justify-start overflow-hidden"
-      v-if="!showModal"
     >
+      <!-- v-if="!showModal && !isLoading" -->
       <div
-        class="w-full p-6 bg-white border-t-4 border-gray-600 rounded-md shadow-md border-top lg:max-w-lg"
+        class="w-full p-6 border-t-4 rounded-md shadow-md border-top lg:max-w-lg"
       >
-        <h1 class="text-3xl font-semibold text-center text-gray-700">
+        <h1 class="text-3xl font-semibold text-center mb-4">
           Create new report
         </h1>
-        <form class="space-y-4" @submit.prevent>
-          <div v-for="field in fields" :key="field">
+        <!-- <form class="space-y-4" @submit.prevent> -->
+        <!-- <div v-for="field in fields" :key="field">
             <CustomInput v-model="employee[field]" :field="field" />
-          </div>
+          </div> -->
+        <FormKit type="form" submit-label="Create" @submit="createEmployee">
+          <FormKit label="Full name" name="name" id="name" />
+          <FormKit
+            type="email"
+            label="Email"
+            name="email"
+            id="name"
+            validation="required|email"
+            validation-visibility="blur"
+          />
+          <FormKit label="Gender" name="gender" id="gender" />
+          <FormKit label="Job" name="job" id="job" />
+          <FormKit label="Company" name="company" id="company" />
+          <FormKit label="Country" name="country" id="country" />
 
-          <div>
+          <!-- <div>
             <button
               class="btn btn-block"
               @click="handleButton"
@@ -74,8 +89,10 @@ const handleButton = () => {
                 class="loading loading-dots loading-md"
               ></span>
             </button>
-          </div>
-        </form>
+          </div> -->
+        </FormKit>
+
+        <!-- </form> -->
       </div>
     </div>
   </main>

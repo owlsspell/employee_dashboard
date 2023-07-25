@@ -6,7 +6,7 @@ defineEmits(["click"]);
 <template>
   <div class="modal" :open="showModal">
     <form class="modal-box" @submit.prevent>
-      <div class="mx-auto max-w-7xl pb-6 h-full">
+      <div class="mx-auto max-w-7xl h-full">
         <p class="py-4" v-if="status.isError">
           An error occurred: {{ status.error.response.data }}
         </p>

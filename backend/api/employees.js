@@ -15,7 +15,7 @@ router.get('/getEmployees', async (req, res) => {
 
 router.post("/createReport", async (req, res) => {
   const employee = req.body;
-
+  console.log('employee,', employee);
   // await sql`SELECT * from CARTS where user_id=${params.user}`;
   // await sql`INSERT INTO Employees (${columns}) VALUES (${values});`;
 
@@ -24,6 +24,7 @@ router.post("/createReport", async (req, res) => {
   // setTimeout(async () => {
   try {
     // throw new Error(' Could not create')
+    // if()
     await prisma.employees.create({ data: employee })
 
     return res.send("Successfully!");
@@ -31,17 +32,16 @@ router.post("/createReport", async (req, res) => {
     return res.status(404).send(err.message);
   }
 
-  // }, 1000)
+  // }, 2000)
 
 });
+
+// router.post("/doSomething", async (req, res) => {
 //creante a new emloyees
 // await sql`\COPY  Employees FROM '/tmp/data.csv' DELIMITER ',' CSV`
+
 //change data
 // await sql`UPDATE "Employees" SET name='Leo Yorkston' WHERE  id=1`
-
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port} `);
-// });
-
+// })
 
 export default router
