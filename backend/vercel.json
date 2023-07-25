@@ -3,21 +3,26 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
   "headers": [
     {
-      "key": "Access-Control-Allow-Origin",
-      "value": [
-        "https://employee-dashboard-backend.vercel.app/",
-        "https://employee-dashboard-backend-owlsspell.vercel.app/",
-        "https://employee-dashboard-backend-git-main-owlsspell.vercel.app/"
+      "source": "https://employee-dashboard-neon.vercel.app/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": [
+            "https://employee-dashboard-backend.vercel.app/",
+            "https://employee-dashboard-backend-owlsspell.vercel.app/",
+            "https://employee-dashboard-backend-git-main-owlsspell.vercel.app/"
+          ]
+        },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,HEAD,OPTIONS,POST,PUT"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        }
       ]
-    },
-    { "key": "Access-Control-Allow-Credentials", "value": "true" },
-    {
-      "key": "Access-Control-Allow-Methods",
-      "value": "GET,HEAD,OPTIONS,POST,PUT"
-    },
-    {
-      "key": "Access-Control-Allow-Headers",
-      "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     },
     {
       "source": "https://employee-dashboard-frontend-owlsspell.vercel.app/(.*)",
