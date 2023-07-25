@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/vue-query";
 import { base } from "../../config";
 import { onMounted } from "vue";
+import axios from "axios";
 
 defineProps({
   setOpen: Function,
@@ -19,9 +20,7 @@ const headers = [
 ];
 
 const fetcher = async () =>
-  await fetch(base + "getEmployees").then((response) =>
-    response.json(response)
-  );
+  await axios.get(base + "getEmployees").then((response) => response.data);
 
 onMounted(() => {
   fetcher();
@@ -35,7 +34,9 @@ const { isLoading, isError, data, error } = useQuery({
 
 <template>
   <main>
-    <div v-if="isLoading">Loading...</div>
+    <div v-if="isLoading" class="w-full h-full mb-6">
+      <span class="loading loading-dots loading-lg mx-auto h-full block"></span>
+    </div>
     <div v-if="isError">Something went wrong...</div>
     <div class="mx-auto max-w-7xl pb-6" v-if="data && data.length > 0">
       <div class="overflow-x-auto">

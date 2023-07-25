@@ -2,15 +2,6 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 const router = express.Router();
 
-// const corsOptions = {
-//   origin: '*',
-//   optionSuccessStatus: 200,
-// }
-
-// app.use(express.json({ limit: "50mb" }));
-// app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-// app.use(cors(corsOptions))
-
 const prisma = new PrismaClient();
 
 router.get('/', (req, res) => {
@@ -28,10 +19,20 @@ router.post("/createReport", async (req, res) => {
   // await sql`SELECT * from CARTS where user_id=${params.user}`;
   // await sql`INSERT INTO Employees (${columns}) VALUES (${values});`;
 
-  await prisma.employees.create({ data: employee })
-  console.log('employee', employee);
-  // console.log('Created new user: ', newUser)
-  res.json(employee);
+  // await prisma.employees.create({ data: employee })
+  // console.log('employee', employee);
+  // setTimeout(async () => {
+  try {
+    // throw new Error(' Could not create')
+    await prisma.employees.create({ data: employee })
+
+    return res.send("Successfully!");
+  } catch (err) {
+    return res.status(404).send(err.message);
+  }
+
+  // }, 1000)
+
 });
 //creante a new emloyees
 // await sql`\COPY  Employees FROM '/tmp/data.csv' DELIMITER ',' CSV`
