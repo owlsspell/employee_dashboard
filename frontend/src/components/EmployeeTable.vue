@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/vue-query";
 import { base } from "../../config";
 import { onMounted } from "vue";
 import axios from "axios";
+import * as dayjs from "dayjs";
 
 defineProps({
   setOpen: Function,
@@ -51,7 +52,11 @@ const { isLoading, isError, data, error } = useQuery({
           <tbody v-for="user in data" :key="user.id">
             <tr>
               <td v-for="header in headers" :key="user.id + ' ' + header">
-                {{ user[header] }}
+                {{
+                  header === "date"
+                    ? dayjs(Number(user[header])).format("MM/DD/YYYY")
+                    : user[header]
+                }}
               </td>
             </tr>
           </tbody>

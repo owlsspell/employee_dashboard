@@ -33,5 +33,8 @@ export default {
     },
     submit: {
         input: "btn btn-block mt-4 formkit-message:text-red-500",
+    },
+    form: {
+        message: 'text-red-500 mb-1 text-xs'
     }
 }
