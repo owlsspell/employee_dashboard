@@ -15,8 +15,10 @@
     "@tanstack/vue-query": "^4.32.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "echarts": "^5.4.3",
     "theme-change": "^2.5.0",
     "vue": "^3.2.47",
+    "vue-echarts": "^6.6.0",
     "vue-router": "4"
   },
   "devDependencies": {

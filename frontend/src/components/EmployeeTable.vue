@@ -1,9 +1,9 @@
 <script setup>
 import { useQuery } from "@tanstack/vue-query";
-import { base } from "../../config";
 import { onMounted } from "vue";
-import axios from "axios";
 import * as dayjs from "dayjs";
+import { getAllEmployees } from "../api/fetchers";
+import Loader from "./global/Loader.vue";
 
 defineProps({
   setOpen: Function,
@@ -20,13 +20,11 @@ const headers = [
   "date",
 ];
 
-const fetcher = async () =>
-  await axios.get(base + "getEmployees").then((response) => response.data);
+const fetcher = () => getAllEmployees();
 
 onMounted(() => {
   fetcher();
 });
-
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["employees"],
   queryFn: fetcher,
@@ -35,9 +33,7 @@ const { isLoading, isError, data, error } = useQuery({
 
 <template>
   <main>
-    <div v-if="isLoading" class="w-full h-full mb-6">
-      <span class="loading loading-dots loading-lg mx-auto h-full block"></span>
-    </div>
+    <Loader :isLoading="isLoading" />
     <div v-if="isError">Something went wrong...</div>
     <div class="mx-auto max-w-7xl pb-6" v-if="data && data.length > 0">
       <div class="overflow-x-auto">
