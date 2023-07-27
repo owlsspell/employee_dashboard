@@ -95,13 +95,17 @@ const option = ref({
     },
   ],
 });
+console.log(typeof data.value !== "undefined");
 </script>
 
 <template>
   <Loader :isLoading="isLoading" />
   {{ console.log("Render", data) }}
   {{ console.log("isLoading", isLoading) }}
-  <div class="mx-auto w-full pb-6" v-if="!isLoading">
+  <div
+    class="mx-auto w-full pb-6"
+    v-if="!isLoading && typeof data !== 'undefined'"
+  >
     <v-chart class="chart" :option="option" autoresize />
   </div>
 </template>
