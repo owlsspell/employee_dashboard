@@ -43,8 +43,9 @@ const option = ref({
     formatter: "{a} <br/>{b} : {c} ({d}%)",
   },
   legend: {
-    orient: "vertical",
+    orient: "horizontal",
     left: "left",
+    top: "40px",
     // data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"],
   },
   series: [
@@ -52,7 +53,7 @@ const option = ref({
       name: "Traffic Sources",
       type: "pie",
       radius: "55%",
-      center: ["50%", "40%"],
+      center: ["50%", "48%"],
       data: data,
       emphasis: {
         itemStyle: {
@@ -67,8 +68,8 @@ const option = ref({
 </script>
 
 <template>
-  <div class="mx-auto max-w-7xl pb-6" v-if="data && data.length > 0">
-    {{ console.log(isLoading) }}
+  <Loader :isLoading="isLoading" />
+  <div class="mx-auto w-full pb-6" v-if="data && data.length > 0 && !isLoading">
     <Loader :isLoading="isLoading" />
     <v-chart v-if="!isLoading" class="chart" :option="option" autoresize />
   </div>

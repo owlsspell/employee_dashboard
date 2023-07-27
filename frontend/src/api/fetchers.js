@@ -10,4 +10,11 @@ export const getUniqueFields = async (column) => await axios.get(base + "getUniq
 }).then((response) => {
     return response.data
 });
+export const getColumnAndCount = async (column) => await axios.get(base + "getColumnAndCount", {
+    params: {
+        column
+    }
+}).then((response) => {
+    return response.data
+});
 

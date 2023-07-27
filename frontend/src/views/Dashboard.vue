@@ -1,5 +1,11 @@
 <script setup>
-import ChartEmployees from "../components/Dashboard/ChartEmployees.vue";
+import ChartLine from "../components/Dashboard/ChartLine.vue";
+import ChartPie from "../components/Dashboard/ChartPie.vue";
 </script>
 
-<template><ChartEmployees /></template>
+<template>
+  <div class="grid grid-cols-2 gap-4">
+    <ChartPie />
+    <ChartLine />
+  </div>
+</template>

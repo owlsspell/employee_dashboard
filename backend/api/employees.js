@@ -1,7 +1,8 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 const router = express.Router();
-
+import dayjs from "dayjs";
+import _ from "lodash"
 const prisma = new PrismaClient();
 
 router.get('/', (req, res) => {
@@ -9,7 +10,9 @@ router.get('/', (req, res) => {
 })
 
 router.get('/getEmployees', async (req, res) => {
-  const employees = await prisma.employees.findMany()
+  const employees = await prisma.employees.findMany({
+    // orderBy: [{ date: "asc" }]
+  })
   res.json(employees)
 })
 
@@ -37,7 +40,7 @@ router.post("/createReport", async (req, res) => {
 });
 
 router.get("/getUniqueFields", async (req, res) => {
-  console.log(req.query.column);
+  // console.log(req.query.column);
   try {
     // const result = await prisma.employees.findMany({
     //   distinct: [req.query.column],
@@ -48,13 +51,50 @@ router.get("/getUniqueFields", async (req, res) => {
     const result = await prisma.employees.groupBy({
       by: [req.query.column],
       _count: true,
+      // orderBy: [
+      //   { [req.query.column]: "asc" }
+      // ]
     })
-    const resultData = result.map((item) => ({ name: item.country, value: item._count }));
+    const resultData = result.map((item) => ({ name: item[req.query.column], value: item._count }));
     // const resultCountry = resultData.reduce((total, item) => {
     //   total.push(item.name);
     //   return total;
     // }, []);
     return res.json(resultData);
+
+  } catch (err) {
+    return res.status(404).send(err.message);
+  }
+});
+
+
+router.get("/getColumnAndCount", async (req, res) => {
+  try {
+    const result = await prisma.employees.findMany({
+      // distinct: [req.query.column],
+      select: {
+        date: true
+      },
+      orderBy: [
+        {
+          date: 'asc',
+        },
+      ],
+    })
+    // const result = await prisma.employees.groupBy({
+    // by: [req.query.column],
+    // _count: true,
+    // orderBy: [
+    //   { [req.query.column]: "asc" }
+    // ]
+    // })
+    const rowArr = result.reduce((acc, item) => { acc.push(dayjs(Number(item.date)).format("YYYY-MM-DD")); return acc }, [])
+    console.log(_.countBy(rowArr));
+    const counts = _.countBy(rowArr)
+    console.log('counts', counts);
+    const timeArr = Object.keys(counts).map(key => ([dayjs(key).unix(), counts[key]]));
+    console.log('toTime', timeArr);
+    return res.json({ timeArr, rowArr });
   } catch (err) {
     return res.status(404).send(err.message);
   }
