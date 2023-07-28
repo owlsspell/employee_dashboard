@@ -45,7 +45,7 @@ router.get("/getUniqueFields", async (req, res) => {
   }
 });
 
-
+//test
 router.get("/getColumnAndCount", async (req, res) => {
   try {
     const result = await prisma.employees.findMany({
