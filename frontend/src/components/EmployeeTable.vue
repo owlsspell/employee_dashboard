@@ -1,7 +1,7 @@
 <script setup>
 import { useQuery } from "@tanstack/vue-query";
 import { onMounted } from "vue";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import { getAllEmployees } from "../api/fetchers";
 import Loader from "./global/Loader.vue";
 
