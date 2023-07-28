@@ -11,6 +11,7 @@ export const useEmployeesStore = defineStore('employees', () => {
         // count.value++
         return getColumnAndCount("date").then(data => {
             lineChartData.value = data.timeArr
+            return lineChartData
         })
     }
 

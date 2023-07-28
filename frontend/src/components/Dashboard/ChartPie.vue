@@ -49,7 +49,7 @@ const option = ref({
       name: "Traffic Sources",
       type: "pie",
       radius: "55%",
-      center: ["50%", "48%"],
+      center: ["50%", "55%"],
       data: data,
       emphasis: {
         itemStyle: {

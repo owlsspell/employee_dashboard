@@ -31,10 +31,10 @@ use([
 provide(THEME_KEY, "light");
 
 const store = useEmployeesStore();
-console.log("!!!!!!!store", store.lineChartData);
+
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["dateChart"],
-  queryFn: () => getColumnAndCount("date"),
+  queryFn: () => store.updateLineChartData(),
 });
 
 const option = ref({
@@ -59,12 +59,12 @@ const option = ref({
   dataZoom: [
     {
       type: "inside",
-      start: 0,
-      end: 20,
+      start: 65,
+      end: 100,
     },
     {
-      start: 0,
-      end: 20,
+      start: 65,
+      end: 100,
     },
   ],
   series: [
@@ -79,13 +79,11 @@ const option = ref({
 });
 
 watch(
-  data,
+  () => store.lineChartData,
   (newValue, oldValue) => {
     if (newValue !== oldValue) {
-      console.log("newValue", newValue);
       option.value.series[0].data = null;
-      option.value.series[0].data = newValue.timeArr;
-      store.updateLineChartData();
+      option.value.series[0].data = store.lineChartData;
     }
   },
   { immediate: true }
@@ -94,10 +92,7 @@ watch(
 
 <template>
   <Loader :isLoading="isLoading" />
-  <div
-    class="mx-auto w-full pb-6"
-    v-if="!isLoading && typeof data !== 'undefined'"
-  >
+  <div class="mx-auto w-full pb-6" v-if="!isLoading">
     <v-chart :option="option" autoresize />
   </div>
 </template>
