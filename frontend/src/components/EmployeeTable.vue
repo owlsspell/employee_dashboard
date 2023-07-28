@@ -22,7 +22,7 @@ const headers = [
 
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["employees"],
-  queryFn: () => getAllEmployees(),
+  queryFn: getAllEmployees,
 });
 </script>
 
