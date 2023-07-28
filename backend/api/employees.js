@@ -16,28 +16,6 @@ router.get('/getEmployees', async (req, res) => {
   res.json(employees)
 })
 
-router.post("/createReport", async (req, res) => {
-  const employee = req.body;
-  console.log('employee,', employee);
-  // await sql`SELECT * from CARTS where user_id=${params.user}`;
-  // await sql`INSERT INTO Employees (${columns}) VALUES (${values});`;
-
-  // await prisma.employees.create({ data: employee })
-  // console.log('employee', employee);
-  // setTimeout(async () => {
-  try {
-    // throw new Error(' Could not create')
-    // if()
-    await prisma.employees.create({ data: employee })
-
-    return res.send("Successfully!");
-  } catch (err) {
-    return res.status(404).send(err.message);
-  }
-
-  // }, 2000)
-
-});
 
 router.get("/getUniqueFields", async (req, res) => {
   // console.log(req.query.column);
@@ -99,6 +77,30 @@ router.get("/getColumnAndCount", async (req, res) => {
   } catch (err) {
     return res.status(404).send(err.message);
   }
+});
+
+
+router.post("/createReport", async (req, res) => {
+  const employee = req.body;
+  console.log('employee,', employee);
+  // await sql`SELECT * from CARTS where user_id=${params.user}`;
+  // await sql`INSERT INTO Employees (${columns}) VALUES (${values});`;
+
+  // await prisma.employees.create({ data: employee })
+  // console.log('employee', employee);
+  // setTimeout(async () => {
+  try {
+    // throw new Error(' Could not create')
+    // if()
+    await prisma.employees.create({ data: employee })
+
+    return res.send("Successfully!");
+  } catch (err) {
+    return res.status(404).send(err.message);
+  }
+
+  // }, 2000)
+
 });
 
 
