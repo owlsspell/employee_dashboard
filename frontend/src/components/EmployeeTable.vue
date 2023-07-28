@@ -20,14 +20,9 @@ const headers = [
   "date",
 ];
 
-const fetcher = () => getAllEmployees();
-
-onMounted(() => {
-  fetcher();
-});
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["employees"],
-  queryFn: fetcher,
+  queryFn: () => getAllEmployees(),
 });
 </script>
 
