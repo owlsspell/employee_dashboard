@@ -9,38 +9,10 @@
           "key": "Access-Control-Allow-Origin",
           "value": "https://employee-dashboard-neon.vercel.app"
         },
-        { "key": "Access-Control-Allow-Credentials", "value": "true" },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
         {
           "key": "Access-Control-Allow-Origin",
           "value": "https://employee-dashboard-frontend-owlsspell.vercel.app/"
         },
-        { "key": "Access-Control-Allow-Credentials", "value": "true" },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
         {
           "key": "Access-Control-Allow-Origin",
           "value": "https://employee-dashboard-frontend-git-main-owlsspell.vercel.app/"
