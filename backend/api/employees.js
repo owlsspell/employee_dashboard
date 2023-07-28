@@ -89,12 +89,13 @@ router.get("/getColumnAndCount", async (req, res) => {
     // ]
     // })
     const rowArr = result.reduce((acc, item) => { acc.push(dayjs(Number(item.date)).format("YYYY-MM-DD")); return acc }, [])
-    console.log(_.countBy(rowArr));
+    // console.log(_.countBy(rowArr));
     const counts = _.countBy(rowArr)
     console.log('counts', counts);
-    const timeArr = Object.keys(counts).map(key => ([dayjs(key).unix(), counts[key]]));
-    console.log('toTime', timeArr);
-    return res.json({ timeArr, rowArr });
+    const timeArr = Object.keys(counts).map(key => ([key, counts[key]]));
+    // const timeArr = Object.keys(counts).map(key => ([dayjs(key).unix(), counts[key]]));
+
+    return res.json({ timeArr });
   } catch (err) {
     return res.status(404).send(err.message);
   }

@@ -1,5 +1,5 @@
-import newEmployee from "./new-employee"
+import employeesStore from "./new-employee"
 
 export default {
-    newEmployee
+    employeesStore
 }

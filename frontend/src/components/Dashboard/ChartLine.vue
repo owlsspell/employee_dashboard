@@ -15,6 +15,8 @@ import { ref, provide } from "vue";
 import Loader from "../global/Loader.vue";
 import { GridComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
+import { useEmployeesStore } from "../../store/employeesStore";
+import { watch } from "vue";
 
 use([
   CanvasRenderer,
@@ -27,21 +29,13 @@ use([
 ]);
 
 provide(THEME_KEY, "light");
-// const data = ref();
-const fetcher = () => getColumnAndCount("date");
-// getColumnAndCount("date").then((res) => (data.value = res));
 
+const store = useEmployeesStore();
+console.log("!!!!!!!store", store.lineChartData);
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["dateChart"],
-  queryFn: fetcher,
+  queryFn: () => getColumnAndCount("date"),
 });
-
-// console.log("data", toRaw(data.value));
-console.log(toRaw(data.value));
-console.log(data);
-console.log(data.value);
-
-onMounted(async () => await fetcher());
 
 const option = ref({
   tooltip: {
@@ -57,7 +51,6 @@ const option = ref({
   xAxis: {
     type: "category",
     boundaryGap: false,
-    // data: toRaw(data.value).rowArr,
   },
   yAxis: {
     type: "value",
@@ -76,18 +69,7 @@ const option = ref({
   ],
   series: [
     {
-      // data: toRaw(data.value).timeArr,
-      // data: [
-      //   [1643925600, 1],
-      //   [1644098400, 1],
-      //   [1648332000, 1],
-      //   [1648760400, 1],
-      //   [1649624400, 1],
-      //   [1653253200, 1],
-      //   [1654030800, 1],
-      // ],
-      // data: data._rawValue.timeArr,
-      data: data.value?.timeArr,
+      data: null,
       type: "line",
       smooth: true,
       symbol: "none",
@@ -95,18 +77,28 @@ const option = ref({
     },
   ],
 });
-console.log(typeof data.value !== "undefined");
+
+watch(
+  data,
+  (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      console.log("newValue", newValue);
+      option.value.series[0].data = null;
+      option.value.series[0].data = newValue.timeArr;
+      store.updateLineChartData();
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
   <Loader :isLoading="isLoading" />
-  {{ console.log("Render", data) }}
-  {{ console.log("isLoading", isLoading) }}
   <div
     class="mx-auto w-full pb-6"
     v-if="!isLoading && typeof data !== 'undefined'"
   >
-    <v-chart class="chart" :option="option" autoresize />
+    <v-chart :option="option" autoresize />
   </div>
 </template>
 

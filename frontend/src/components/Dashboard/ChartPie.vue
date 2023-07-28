@@ -24,14 +24,10 @@ use([
 
 provide(THEME_KEY, "light");
 
-const fetcher = () => getUniqueFields("country");
-
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["countryChart"],
-  queryFn: fetcher,
+  queryFn: () => getUniqueFields("country"),
 });
-
-onMounted(async () => await fetcher());
 
 const option = ref({
   title: {
