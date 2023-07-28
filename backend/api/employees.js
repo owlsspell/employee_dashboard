@@ -44,7 +44,7 @@ router.get("/getUniqueFields", async (req, res) => {
     return res.status(404).send(err.message);
   }
 });
-
+//test versel
 router.get("/getColumnAndCount", async (req, res) => {
   try {
     const result = await prisma.employees.findMany({
