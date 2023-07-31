@@ -12,10 +12,11 @@ router.get('/', (req, res) => {
 router.get('/getEmployees', async (req, res) => {
   console.log('req.query', req.query);
   const { numberOfNotes, page } = req.query
+  const skip = Number((numberOfNotes * (page - 1)))
   const employees = await prisma.employees.findMany({
     // orderBy: [{ date: "asc" }]
-    take: Number(numberOfNotes),
-    skip: Number((numberOfNotes * (page - 1))),
+    take: +numberOfNotes,
+    skip
   })
   const count = await prisma.employees.count()
   res.json({ employees, count })
