@@ -1153,7 +1153,14 @@ vue-router@4:
   dependencies:
     "@vue/devtools-api" "^6.5.0"
 
-vue@^3.2.47:
+vue-use-paginator@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/vue-use-paginator/-/vue-use-paginator-0.4.0.tgz#5e55193f5630b09b334abb32ea80adc41f5e239f"
+  integrity sha512-GKwTyPyRZxefQYowRzAXzIQe0F7sEw0uUEHqmwenzGhv7BSbD4RgluNCZGGpqG3jeIkmS7ZuMqylcpqMXxT7QA==
+  dependencies:
+    vue "^3.2.37"
+
+vue@^3.2.37, vue@^3.2.47:
   version "3.3.4"
   resolved "https://registry.npmjs.org/vue/-/vue-3.3.4.tgz"
   integrity sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==

@@ -1,7 +1,11 @@
 import axios from "axios";
 import { base } from "../../config";
 
-export const getAllEmployees = async () => await axios.get(base + "getEmployees").then((response) => response.data);
+export const getAllEmployees = async (numberOfNotes, page) => await axios.get(base + "getEmployees", {
+    params: {
+        numberOfNotes, page
+    }
+}).then((response) => response.data);
 
 export const getUniqueFields = async (column) => await axios.get(base + "getUniqueFields", {
     params: {

@@ -1,11 +1,11 @@
 <script setup>
-import { reactive, ref, toRaw, watch } from "vue";
-import CustomInput from "./CustomInput.vue";
+import { reactive, ref } from "vue";
 import { useMutation } from "@tanstack/vue-query";
 import { base } from "../../../config";
 import axios from "axios";
-import Modal from "../modal/Modal.vue";
-import Loading from "../modal/Loading.vue";
+import Modal from "../modal/modal.vue";
+import Loading from "../modal/loading.vue";
+import { reset } from "@formkit/core";
 
 let showModal = ref(false);
 
@@ -33,6 +33,7 @@ const createEmployee = async (fields) => {
   fields = { ...fields, date: Date.now().toString() };
   console.log("fields", fields);
   mutate(fields);
+  reset("createEmployee");
 };
 </script>
 
@@ -62,7 +63,12 @@ const createEmployee = async (fields) => {
         <!-- <div v-for="field in fields" :key="field">
             <CustomInput v-model="employee[field]" :field="field" />
           </div> -->
-        <FormKit type="form" submit-label="Create" @submit="createEmployee">
+        <FormKit
+          type="form"
+          id="createEmployee"
+          submit-label="Create"
+          @submit="createEmployee"
+        >
           <FormKit label="Full name" name="name" id="name" />
           <FormKit
             type="email"

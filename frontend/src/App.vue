@@ -1,6 +1,6 @@
 <script setup>
 import Header from "./components/Header/Header.vue";
-import HelloWorld from "./components/HelloWorld.vue";
+// import HelloWorld from "./components/HelloWorld.vue";
 import EmployeeTable from "./components/EmployeeTable.vue";
 import LayoutHeader from "./components/Header/LayoutHeader.vue";
 import router from "./router";

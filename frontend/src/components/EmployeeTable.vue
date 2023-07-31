@@ -1,9 +1,12 @@
+div
 <script setup>
 import { useQuery } from "@tanstack/vue-query";
-import { onMounted } from "vue";
+import { ref, watch } from "vue";
 import dayjs from "dayjs";
 import { getAllEmployees } from "../api/fetchers";
 import Loader from "./global/Loader.vue";
+
+import Pagination from "./global/Pagination.vue";
 
 defineProps({
   setOpen: Function,
@@ -19,10 +22,13 @@ const headers = [
   "country",
   "date",
 ];
-
+const pageNumber = ref(1);
+const numberOfNotes = ref(10);
 const { isLoading, isError, data, error } = useQuery({
-  queryKey: ["employees"],
-  queryFn: getAllEmployees,
+  queryKey: ["employees", pageNumber],
+  queryFn: () => getAllEmployees(numberOfNotes.value, pageNumber.value),
+  keepPreviousData: true,
+  refetchOnWindowFocus: false,
 });
 </script>
 
@@ -30,7 +36,10 @@ const { isLoading, isError, data, error } = useQuery({
   <main>
     <Loader :isLoading="isLoading" />
     <div v-if="isError">Something went wrong...</div>
-    <div class="mx-auto max-w-7xl pb-6" v-if="data && data.length > 0">
+    <div
+      class="mx-auto max-w-7xl pb-6"
+      v-if="data && data.employees.length > 0"
+    >
       <div class="overflow-x-auto">
         <table class="table table-xs">
           <thead>
@@ -40,7 +49,7 @@ const { isLoading, isError, data, error } = useQuery({
               </th>
             </tr>
           </thead>
-          <tbody v-for="user in data" :key="user.id">
+          <tbody v-for="user in data.employees" :key="user.id">
             <tr>
               <td v-for="header in headers" :key="user.id + ' ' + header">
                 {{
@@ -63,6 +72,16 @@ const { isLoading, isError, data, error } = useQuery({
             </tr>
           </tfoot> -->
         </table>
+      </div>
+      <div class="flex justify-center mt-3">
+        <div v-if="pageNumber && data && !isLoading">
+          <Pagination
+            :pageNumber="pageNumber"
+            :count="data.count"
+            :numberOfNotes="numberOfNotes"
+            @click="(currentPage) => (pageNumber = currentPage)"
+          />
+        </div>
       </div>
     </div>
   </main>
