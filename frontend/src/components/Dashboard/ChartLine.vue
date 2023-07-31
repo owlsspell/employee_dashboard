@@ -92,13 +92,13 @@ watch(
 
 <template>
   <Loader :isLoading="isLoading" />
-  <div class="mx-auto w-full pb-6" v-if="!isLoading">
+  <div class="mx-auto w-full h-screen" v-if="!isLoading">
     <v-chart :option="option" autoresize />
   </div>
 </template>
 
 <style scoped>
 .chart {
-  height: 100vh;
+  height: 100%;
 }
 </style>

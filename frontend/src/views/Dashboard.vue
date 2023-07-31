@@ -4,7 +4,7 @@ import ChartPie from "../components/Dashboard/ChartPie.vue";
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-4 m-5">
+  <div class="h-full grid grid-cols-1 gap-4 m-5 md:grid-cols-2">
     <ChartPie />
     <ChartLine />
   </div>

@@ -23,7 +23,6 @@ use([
 ]);
 
 provide(THEME_KEY, "light");
-
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["countryChart"],
   queryFn: () => getUniqueFields("country"),
@@ -33,6 +32,12 @@ const option = ref({
   title: {
     text: "Traffic Sources",
     left: "center",
+    textStyle: {
+      // color: theme === "dark" ? "#EEF1FA" : "#464646",
+      // color: "inherit",
+      fontSize: 18,
+      fontWeight: "bold",
+    },
   },
   tooltip: {
     trigger: "item",
@@ -65,7 +70,7 @@ const option = ref({
 
 <template>
   <Loader :isLoading="isLoading" />
-  <div class="mx-auto w-full pb-6" v-if="data && data.length > 0 && !isLoading">
+  <div class="mx-auto w-full" v-if="data && data.length > 0 && !isLoading">
     <Loader :isLoading="isLoading" />
     <v-chart v-if="!isLoading" class="chart" :option="option" autoresize />
   </div>

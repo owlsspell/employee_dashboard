@@ -100,7 +100,7 @@ const themes = ["light", "dark", "coffee"];
               <Menu as="div" class="relative ml-3">
                 <div>
                   <MenuButton
-                    class="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    class="flex max-w-xs items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
                     <span class="sr-only">Open user menu</span>
                     <img
@@ -119,9 +119,9 @@ const themes = ["light", "dark", "coffee"];
                   leave-to-class="transform opacity-0 scale-95"
                 >
                   <MenuItems
-                    class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-base-100 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    class="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-base-100 py-1"
                   >
-                    <MenuItem
+                    <!-- <MenuItem
                       v-for="item in userNavigation"
                       :key="item.name"
                       v-slot="{ active }"
@@ -129,12 +129,20 @@ const themes = ["light", "dark", "coffee"];
                       <a
                         :href="item.href"
                         :class="[
-                          active ? 'bg-gray-100' : '',
+                          // active ? 'bg-gray-900' : '',
                           'block px-4 py-2 text-sm',
                         ]"
                         >{{ item.name }}</a
                       >
-                    </MenuItem>
+                    </MenuItem> -->
+                    <ul
+                      tabIndex="{0}"
+                      className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box"
+                    >
+                      <li v-for="item in userNavigation" v-once>
+                        <a :data-set-theme="item.name"> {{ item.name }}</a>
+                      </li>
+                    </ul>
                   </MenuItems>
                 </transition>
               </Menu>
@@ -143,7 +151,7 @@ const themes = ["light", "dark", "coffee"];
           <div class="-mr-2 flex md:hidden">
             <!-- Mobile menu button -->
             <DisclosureButton
-              class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              class="inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             >
               <span class="sr-only">Open main menu</span>
               <Bars3Icon
@@ -189,7 +197,7 @@ const themes = ["light", "dark", "coffee"];
             </div>
             <button
               type="button"
-              class="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              class="ml-auto flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             >
               <span class="sr-only">View notifications</span>
               <BellIcon class="h-6 w-6" aria-hidden="true" />
@@ -201,7 +209,7 @@ const themes = ["light", "dark", "coffee"];
               :key="item.name"
               as="a"
               :href="item.href"
-              class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-400"
               >{{ item.name }}</DisclosureButton
             >
           </div>
