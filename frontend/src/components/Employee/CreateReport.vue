@@ -3,8 +3,8 @@ import { reactive, ref } from "vue";
 import { useMutation } from "@tanstack/vue-query";
 import { base } from "../../../config";
 import axios from "axios";
-import Modal from "../modal/Modal";
-import Loading from "../modal/Loading";
+import Modal from "../modal/Modal.vue";
+import Loading from "../modal/Loading.vue";
 import { reset } from "@formkit/core";
 
 let showModal = ref(false);
