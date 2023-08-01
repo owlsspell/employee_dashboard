@@ -1,27 +1,40 @@
 <script setup>
-import EmployeeTable from "../components/EmployeeTable.vue";
+import EmployeeTable from "../components/EmployeesTable/EmployeeTable.vue";
 import { ref } from "vue";
 import CreateReport from "../components/Employee/CreateReport.vue";
 
 const isOpen = ref(false);
+const isEditMode = ref(false);
 
 const setOpen = (value) => (isOpen.value = value);
+const setEditMode = (value) => (isEditMode.value = value);
 </script>
 
 <template>
   <div class="sm:px-6 lg:px-8">
-    <div class="w-full">
-      <button
-        class="btn btn-xs block normal-case my-3 ml-auto mr-0"
-        @click="setOpen(!isOpen)"
-      >
-        {{ isOpen ? "Back" : "New report" }}
-      </button>
+    <div class="w-full my-3">
+      <div class="flex" :class="isEditMode ? 'justify-between' : 'justify-end'">
+        <span v-if="isEditMode">You are in edit mode</span>
+        <div class="flex">
+          <button
+            class="btn btn-xs block normal-case mr-4"
+            @click="setOpen(!isOpen)"
+          >
+            {{ isOpen ? "Back" : "New report" }}
+          </button>
+          <button
+            class="btn btn-xs block normal-case"
+            @click="setEditMode(!isEditMode)"
+          >
+            {{ isEditMode ? "Back" : "Edit Mode" }}
+          </button>
+        </div>
+      </div>
     </div>
     <div v-show="isOpen">
       <CreateReport />
     </div>
-    <div v-show="!isOpen">
+    <div v-show="!isOpen && !isEditMode">
       <EmployeeTable :setOpen="setOpen" />
     </div>
   </div>

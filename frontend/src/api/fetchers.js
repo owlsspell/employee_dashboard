@@ -21,4 +21,7 @@ export const getColumnAndCount = async (column) => await axios.get(base + "getCo
 }).then((response) => {
     return response.data
 });
+export const editEmployeeData = async (employee) => await axios.post(base + "editEmployeeData", employee).then((response) => {
+    return response.data
+})
 

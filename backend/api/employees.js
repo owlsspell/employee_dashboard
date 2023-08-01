@@ -107,6 +107,28 @@ router.post("/createReport", async (req, res) => {
   // }, 2000)
 
 });
+router.post("/editEmployeeData", async (req, res) => {
+  const employee = req.body;
+  console.log('employee,', employee);
+  // await sql`SELECT * from CARTS where user_id=${params.user}`;
+  // await sql`INSERT INTO Employees (${columns}) VALUES (${values});`;
+
+  // await prisma.employees.create({ data: employee })
+  // console.log('employee', employee);
+  // setTimeout(async () => {
+  try {
+    // throw new Error(' Could not create')
+    // if()
+    await prisma.employees.update({ where: { id: employee.id }, data: employee })
+
+    return res.send("Successfully!");
+  } catch (err) {
+    return res.status(404).send(err.message);
+  }
+
+  // }, 2000)
+
+});
 
 
 // router.post("/doSomething", async (req, res) => {
