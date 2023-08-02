@@ -1,15 +1,13 @@
 div
 <script setup>
-import { useMutation, useQuery } from "@tanstack/vue-query";
-import { ref, watch } from "vue";
+import { useQuery } from "@tanstack/vue-query";
+import { ref } from "vue";
 import dayjs from "dayjs";
-import { getAllEmployees, editEmployeeData } from "../../api/fetchers";
+import { getAllEmployees } from "../../api/fetchers";
 import Loader from "../global/Loader.vue";
 
 import Pagination from "../global/Pagination.vue";
-import ModalForEdit from "../modal/ModalForEdit.vue";
-import { base } from "../../../config";
-import Loading from "../modal/Loading.vue";
+import EditEmloyeeData from "../EmployeesTable/EditEmloyeeData.vue";
 
 defineProps({
   setOpen: Function,
@@ -28,49 +26,38 @@ const headers = [
 const isOpenUserInfo = ref(false);
 const isLoaderShow = ref(false);
 const userInfo = ref({});
-console.log("isOpenUserInfo", isOpenUserInfo);
+
 const pageNumber = ref(1);
 const numberOfNotes = ref(10);
+
 const { isLoading, isError, data, error, refetch } = useQuery({
   queryKey: ["employees", pageNumber],
   queryFn: () => getAllEmployees(numberOfNotes.value, pageNumber.value),
   keepPreviousData: true,
   refetchOnWindowFocus: false,
 });
-const { isLoadingMut, isErrorMut, errorMut, isSuccess, mutate } = useMutation({
-  mutationFn: async (employee) => editEmployeeData(employee),
-  onSuccess: (data) => {
-    isOpenUserInfo.value = false;
-    isLoaderShow.value = false;
-    refetch();
-  },
-  onError: (error) => {},
-});
 function handleEditModal(user) {
   isOpenUserInfo.value = true;
   userInfo.value = user;
 }
-function saveData(data) {
-  isLoaderShow.value = true;
 
-  mutate(data);
+function setLoaderShow(val) {
+  isLoaderShow.value = val;
 }
-
-console.log("isLoadingMut", isLoadingMut);
 </script>
 
 <template>
   <main>
     <Loader :isLoading="isLoading" />
-
     <div v-if="isError">Something went wrong...</div>
     <div v-if="isOpenUserInfo">
-      <ModalForEdit
+      <EditEmloyeeData
         :showModal="isOpenUserInfo"
         :isLoaderShow="isLoaderShow"
         :userInfo="userInfo"
-        @saveData="saveData"
         @close="isOpenUserInfo = false"
+        @setLoaderShow="setLoaderShow"
+        @refetch="refetch()"
       />
     </div>
     <div

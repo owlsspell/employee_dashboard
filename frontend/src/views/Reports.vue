@@ -4,17 +4,14 @@ import { ref } from "vue";
 import CreateReport from "../components/Employee/CreateReport.vue";
 
 const isOpen = ref(false);
-const isEditMode = ref(false);
 
 const setOpen = (value) => (isOpen.value = value);
-const setEditMode = (value) => (isEditMode.value = value);
 </script>
 
 <template>
   <div class="sm:px-6 lg:px-8">
     <div class="w-full my-3">
-      <div class="flex" :class="isEditMode ? 'justify-between' : 'justify-end'">
-        <span v-if="isEditMode">You are in edit mode</span>
+      <div class="flex justify-end">
         <div class="flex">
           <button
             class="btn btn-xs block normal-case mr-4"
@@ -22,19 +19,13 @@ const setEditMode = (value) => (isEditMode.value = value);
           >
             {{ isOpen ? "Back" : "New report" }}
           </button>
-          <button
-            class="btn btn-xs block normal-case"
-            @click="setEditMode(!isEditMode)"
-          >
-            {{ isEditMode ? "Back" : "Edit Mode" }}
-          </button>
         </div>
       </div>
     </div>
     <div v-show="isOpen">
       <CreateReport />
     </div>
-    <div v-show="!isOpen && !isEditMode">
+    <div v-show="!isOpen">
       <EmployeeTable :setOpen="setOpen" />
     </div>
   </div>

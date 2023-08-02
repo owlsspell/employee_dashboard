@@ -1,16 +1,41 @@
 <script setup>
-import Loading from "./Loading.vue";
+import { useMutation } from "@tanstack/vue-query";
+import Loading from "../modal/Loading.vue";
+import { editEmployeeData } from "../../api/fetchers";
 
 const props = defineProps(["showModal", "isLoaderShow", "userInfo"]);
-const emit = defineEmits(["saveData", "close"]);
-console.log("isLoaderShow", props.isLoaderShow);
+const emit = defineEmits(["close", "setLoaderShow", "refetch"]);
+
+const { isLoading, isError, error, isSuccess, mutate } = useMutation({
+  mutationFn: async (employee) => editEmployeeData(employee),
+  onSuccess: (data) => {
+    emit("refetch");
+    setTimeout(() => {
+      emit("close");
+      emit("setLoaderShow", false);
+    }, 1000);
+  },
+  onError: (error) => {
+    setTimeout(() => {
+      emit("setLoaderShow", false);
+    }, 1000);
+  },
+});
+
 function saveData(data) {
-  emit("saveData", data);
+  emit("setLoaderShow", true);
+  mutate(data);
 }
 </script>
+
 <template>
-  {{ console.log("isLoaderShow", isLoaderShow) }}
-  <Loading :showModal="isLoaderShow" />
+  <Loading
+    :showModal="isLoaderShow"
+    :isSuccess="isSuccess"
+    :isError="isError"
+    :error="error"
+    successMessage="Success!"
+  />
   <div class="modal" :open="showModal">
     <div class="modal-box">
       <FormKit
