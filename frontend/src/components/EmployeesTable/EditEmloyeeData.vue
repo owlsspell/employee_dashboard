@@ -37,7 +37,13 @@ function saveData(data) {
     successMessage="Success!"
   />
   <div class="modal" :open="showModal">
-    <div class="modal-box">
+    <div class="modal-box pt-12">
+      <button
+        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-4"
+        @click="$emit('close')"
+      >
+        ✕
+      </button>
       <FormKit
         type="form"
         id="editEmloyee"
