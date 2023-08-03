@@ -8,6 +8,7 @@ import Loader from "../global/Loader.vue";
 
 import Pagination from "../global/Pagination.vue";
 import EditEmloyeeData from "../EmployeesTable/EditEmloyeeData.vue";
+import Loading from "../modal/Loading.vue";
 
 defineProps({
   setOpen: Function,
@@ -30,7 +31,7 @@ const userInfo = ref({});
 const pageNumber = ref(1);
 const numberOfNotes = ref(10);
 
-const { isLoading, isError, data, error, refetch } = useQuery({
+const { isLoading, isError, data, error, refetch, isFetching } = useQuery({
   queryKey: ["employees", pageNumber],
   queryFn: () => getAllEmployees(numberOfNotes.value, pageNumber.value),
   keepPreviousData: true,
@@ -49,6 +50,7 @@ function setLoaderShow(val) {
 <template>
   <main>
     <Loader :isLoading="isLoading" />
+    <!-- <Loading :showModal="isFetching" /> -->
     <div v-if="isError">Something went wrong...</div>
     <div v-if="isOpenUserInfo">
       <EditEmloyeeData
@@ -78,10 +80,13 @@ function setLoaderShow(val) {
               class="hover cursor-pointer"
               @click="() => handleEditModal(user)"
             >
+              {{
+                console.log("index * numberOfNotes,", +index * numberOfNotes)
+              }}
               <td v-for="header in headers" :key="user.id + ' ' + header">
                 {{
                   header === "id"
-                    ? index + 1
+                    ? index + 1 + (pageNumber * numberOfNotes - 10)
                     : header === "date"
                     ? dayjs(Number(user[header])).format("MM/DD/YYYY")
                     : user[header]
@@ -92,7 +97,9 @@ function setLoaderShow(val) {
         </table>
       </div>
       <div class="flex justify-center mt-3">
-        <div v-if="pageNumber && data && !isLoading">
+        <div
+          v-if="pageNumber && data && data.employees.length > 0 && !isLoading"
+        >
           <Pagination
             :pageNumber="pageNumber"
             :count="data.count"

@@ -1,7 +1,7 @@
 <script setup>
 import EmployeeTable from "../components/EmployeesTable/EmployeeTable.vue";
 import { ref } from "vue";
-import CreateReport from "../components/Employee/CreateReport.vue";
+import CreateEmployee from "../components/Employee/CreateEmployee.vue";
 
 const isOpen = ref(false);
 
@@ -23,7 +23,7 @@ const setOpen = (value) => (isOpen.value = value);
       </div>
     </div>
     <div v-show="isOpen">
-      <CreateReport />
+      <CreateEmployee />
     </div>
     <div v-show="!isOpen">
       <EmployeeTable :setOpen="setOpen" />
