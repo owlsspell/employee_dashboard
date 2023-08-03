@@ -1,6 +1,5 @@
 <script setup>
-import { onMounted } from "vue";
-import { getUniqueFields } from "../../api/fetchers";
+import { getUniqueFields } from "../../api/charts";
 import { useQuery } from "@tanstack/vue-query";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";

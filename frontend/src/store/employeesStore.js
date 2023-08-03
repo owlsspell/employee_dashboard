@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getColumnAndCount } from './../api/fetchers';
+import { getColumnAndCount } from './../api/charts';
 import { ref } from 'vue';
 
 export const useEmployeesStore = defineStore('employees', () => {

@@ -1,7 +1,7 @@
 <script setup>
 import { useMutation } from "@tanstack/vue-query";
 import Loading from "../modal/Loading.vue";
-import { editEmployeeData } from "../../api/fetchers";
+import { editEmployeeData } from "../../api/employees";
 
 const props = defineProps(["showModal", "isLoaderShow", "userInfo"]);
 const emit = defineEmits(["close", "setLoaderShow", "refetch"]);

@@ -3,7 +3,7 @@ div
 import { useQuery } from "@tanstack/vue-query";
 import { ref } from "vue";
 import dayjs from "dayjs";
-import { getAllEmployees } from "../../api/fetchers";
+import { getAllEmployees } from "../../api/employees";
 import Loader from "../global/Loader.vue";
 
 import Pagination from "../global/Pagination.vue";

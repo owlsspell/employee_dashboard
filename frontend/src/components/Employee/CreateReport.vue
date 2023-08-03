@@ -1,11 +1,10 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useMutation } from "@tanstack/vue-query";
-import { base } from "../../../config";
-import axios from "axios";
 import Modal from "../modal/Modal.vue";
 import Loading from "../modal/Loading.vue";
 import { reset } from "@formkit/core";
+import { createEmployee } from "../../api/employees";
 
 let showModal = ref(false);
 
@@ -17,11 +16,7 @@ const inputs = fields.reduce((target, key) => {
 const employee = reactive(inputs);
 
 const { isLoading, isError, error, isSuccess, mutate } = useMutation({
-  mutationFn: async (newEmployee) => {
-    await axios.post(base + "createReport", newEmployee).then((response) => {
-      return response;
-    });
-  },
+  mutationFn: (newEmployee) => createEmployee(newEmployee),
   onSuccess: (data) => {
     showModal.value = true;
   },
@@ -29,7 +24,7 @@ const { isLoading, isError, error, isSuccess, mutate } = useMutation({
     showModal.value = true;
   },
 });
-const createEmployee = async (fields) => {
+const handleSubmit = async (fields) => {
   fields = { ...fields, date: Date.now().toString() };
   console.log("fields", fields);
   mutate(fields);
@@ -67,7 +62,7 @@ const createEmployee = async (fields) => {
           type="form"
           id="createEmployee"
           submit-label="Create"
-          @submit="createEmployee"
+          @submit="handleSubmit"
         >
           <FormKit label="Full name" name="name" id="name" />
           <FormKit

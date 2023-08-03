@@ -1,6 +1,4 @@
 <script setup>
-import { onMounted, toRaw } from "vue";
-import { getColumnAndCount } from "../../api/fetchers";
 import { useQuery } from "@tanstack/vue-query";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
