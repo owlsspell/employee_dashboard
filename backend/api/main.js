@@ -5,7 +5,7 @@ import employees from "../src/routes/employees.js"
 import charts from "../src/routes/charts.js"
 import { checkJwt, checkScopes } from "../src/middlewares/auth.js";
 
-router.get('/', checkJwt, (req, res) => {
+router.get('/', (req, res) => {
     res.send("It is working!")
 })
 
