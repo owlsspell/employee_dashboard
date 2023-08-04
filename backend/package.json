@@ -9,7 +9,7 @@
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
-  "author": "",
+  "author": "owlspell",
   "license": "ISC",
   "type": "module",
   "dependencies": {

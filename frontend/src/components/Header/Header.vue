@@ -12,12 +12,13 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import LayoutHeader from "./LayoutHeader.vue";
 import { onMounted, ref } from "vue";
 import { themeChange } from "theme-change";
+import { useAuth0 } from "@auth0/auth0-vue";
 
 onMounted(() => {
   console.log(`the component is now mounted.`);
   themeChange(false);
 });
-const user = {
+const userExample = {
   name: "Tom Cook",
   email: "tom@example.com",
   imageUrl:
@@ -32,20 +33,22 @@ const navigation = [
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   //   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Sign out", href: "#", func: logoutUser },
 ];
 const themes = ["light", "dark", "coffee"];
+
+const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+
+function login() {
+  loginWithRedirect();
+}
+
+function logoutUser() {
+  logout({ logoutParams: { returnTo: window.location.origin } });
+}
 </script>
 
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
   <div class="navbar min-h-full shadow-md rounded-box">
     <Disclosure as="nav" class="w-full block" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -95,9 +98,11 @@ const themes = ["light", "dark", "coffee"];
                   </li>
                 </ul>
               </div>
-
+              <div class="btn" @click="login" v-if="!isAuthenticated">
+                Login
+              </div>
               <!-- Profile dropdown -->
-              <Menu as="div" class="relative ml-3">
+              <Menu as="div" class="relative ml-3" v-if="isAuthenticated">
                 <div>
                   <MenuButton
                     class="flex max-w-xs items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -105,7 +110,7 @@ const themes = ["light", "dark", "coffee"];
                     <span class="sr-only">Open user menu</span>
                     <img
                       class="h-8 w-8 rounded-full"
-                      :src="user.imageUrl"
+                      :src="user.picture"
                       alt=""
                     />
                   </MenuButton>
@@ -139,8 +144,13 @@ const themes = ["light", "dark", "coffee"];
                       tabIndex="{0}"
                       className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box"
                     >
+                      <span v-if="isAuthenticated" class="pl-4 py-2"
+                        >{{ user.nickname }}
+                      </span>
                       <li v-for="item in userNavigation" v-once>
-                        <a :data-set-theme="item.name"> {{ item.name }}</a>
+                        <a :data-set-theme="item.name" @click="item.func">
+                          {{ item.name }}</a
+                        >
                       </li>
                     </ul>
                   </MenuItems>

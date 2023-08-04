@@ -2,10 +2,6 @@ import express from "express";
 const router = express.Router();
 import { createEmployee, editEmployeeData, getEmployees } from "../controllers/employees.js";
 
-router.get('/', (req, res) => {
-  res.send("It is working!")
-})
-
 router.get('/get_employees', getEmployees)
 
 router.post("/create_employee", createEmployee);

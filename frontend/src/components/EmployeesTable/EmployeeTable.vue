@@ -5,10 +5,10 @@ import { ref } from "vue";
 import dayjs from "dayjs";
 import { getAllEmployees } from "../../api/employees";
 import Loader from "../global/Loader.vue";
-
 import Pagination from "../global/Pagination.vue";
 import EditEmloyeeData from "../EmployeesTable/EditEmloyeeData.vue";
 import Loading from "../modal/Loading.vue";
+import { useAuth0 } from "@auth0/auth0-vue";
 
 defineProps({
   setOpen: Function,
@@ -37,6 +37,9 @@ const { isLoading, isError, data, error, refetch, isFetching } = useQuery({
   keepPreviousData: true,
   refetchOnWindowFocus: false,
 });
+
+const { isAuthenticated } = useAuth0();
+
 function handleEditModal(user) {
   isOpenUserInfo.value = true;
   userInfo.value = user;
@@ -48,7 +51,8 @@ function setLoaderShow(val) {
 </script>
 
 <template>
-  <main>
+  <main v-if="!isAuthenticated">You must be logged in</main>
+  <main v-else-if="isAuthenticated">
     <Loader :isLoading="isLoading" />
     <!-- <Loading :showModal="isFetching" /> -->
     <div v-if="isError">Something went wrong...</div>
@@ -64,7 +68,7 @@ function setLoaderShow(val) {
     </div>
     <div
       class="mx-auto max-w-7xl pb-6"
-      v-if="data && data.employees.length > 0"
+      v-if="isAuthenticated && data && data.employees.length > 0"
     >
       <div class="overflow-x-auto">
         <table class="table table-xs">
@@ -80,9 +84,6 @@ function setLoaderShow(val) {
               class="hover cursor-pointer"
               @click="() => handleEditModal(user)"
             >
-              {{
-                console.log("index * numberOfNotes,", +index * numberOfNotes)
-              }}
               <td v-for="header in headers" :key="user.id + ' ' + header">
                 {{
                   header === "id"

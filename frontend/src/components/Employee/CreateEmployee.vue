@@ -26,7 +26,6 @@ const { isLoading, isError, error, isSuccess, mutate } = useMutation({
 });
 const handleSubmit = async (fields) => {
   fields = { ...fields, date: Date.now().toString() };
-  console.log("fields", fields);
   mutate(fields);
   reset("createEmployee");
 };

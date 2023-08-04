@@ -7,6 +7,7 @@ import { plugin, defaultConfig } from '@formkit/vue'
 import { generateClasses } from '@formkit/themes'
 import customTailwindTheme from '../tailwind-theme.js'
 import { createPinia } from 'pinia'
+import { createAuth0 } from '@auth0/auth0-vue';
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -18,5 +19,16 @@ app.use(plugin, defaultConfig({
         classes: generateClasses(customTailwindTheme),
     },
 }))
+
+app.use(
+    createAuth0({
+        domain: import.meta.env.VITE_DOMAIN,
+        clientId: import.meta.env.VITE_CLIENT_ID,
+        authorizationParams: {
+            redirect_uri: window.location.origin,
+            audience: import.meta.env.VITE_BACKEND_DEVELOPMENT,
+        }
+    })
+);
 
 app.mount('#app')
