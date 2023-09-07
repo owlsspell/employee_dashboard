@@ -26,7 +26,7 @@ app.use(
         clientId: import.meta.env.VITE_CLIENT_ID,
         authorizationParams: {
             redirect_uri: window.location.origin,
-            audience: import.meta.env.VITE_BACKEND_DEVELOPMENT,
+            audience: import.meta.env.MODE === 'development' ? import.meta.env.VITE_BACKEND_DEVELOPMENT : import.meta.env.VITE_BACKEND_PRODUCTION,
         }
     })
 );
