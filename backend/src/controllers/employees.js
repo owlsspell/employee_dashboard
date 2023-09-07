@@ -9,7 +9,7 @@ export const getEmployees = async (req, res) => {
         skip
     })
     const count = await prisma.employees.count()
-    return res.json({ employees, count })
+    return res.status(200).json({ employees, count })
 }
 
 export const createEmployee = async (req, res) => {
