@@ -6,7 +6,7 @@ import charts from "../src/routes/charts.js"
 import { checkJwt } from "../src/middlewares/auth.js";
 import allowCors from "../src/allowCors.js";
 
-router.use(allowCors)
+// router.use(allowCors)
 
 router.get('/', (req, res) => {
     res.send("It is working!")
