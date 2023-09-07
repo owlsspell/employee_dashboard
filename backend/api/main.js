@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     res.send("It is working!")
 })
 
-router.use('/employees', checkJwt, allowCors(employees))
+router.use('/employees', checkJwt, employees)
 router.use('/charts', charts)
 
 export default router
