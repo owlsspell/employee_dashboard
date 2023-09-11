@@ -7,7 +7,6 @@ import { getAllEmployees } from "../../api/employees";
 import Loader from "../global/Loader.vue";
 import Pagination from "../global/Pagination.vue";
 import EditEmloyeeData from "../EmployeesTable/EditEmloyeeData.vue";
-import Loading from "../modal/Loading.vue";
 import { useAuth0 } from "@auth0/auth0-vue";
 
 defineProps({

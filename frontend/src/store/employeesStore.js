@@ -4,7 +4,6 @@ import { ref } from 'vue';
 
 export const useEmployeesStore = defineStore('employees', () => {
     const lineChartData = ref([])
-    const xAxisChartData = ref([])
     // const name = ref('Eduardo')
     // const doubleCount = computed(() => count.value * 2)
     async function updateLineChartData() {

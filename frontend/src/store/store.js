@@ -1,5 +1,7 @@
-import employeesStore from "./new-employee"
+import employeesStore from "./employeesStore"
+import authStore from "./auth"
 
 export default {
-    employeesStore
+    employeesStore,
+    authStore
 }

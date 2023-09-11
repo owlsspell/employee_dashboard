@@ -4,8 +4,15 @@ import Header from "./components/Header/Header.vue";
 import EmployeeTable from "./components/EmployeesTable/EmployeeTable.vue";
 import LayoutHeader from "./components/Header/LayoutHeader.vue";
 import router from "./router";
+import { useAuthStore } from "./store/auth";
+import { onMounted } from "vue";
 
 console.log("MODE", import.meta.env.MODE);
+const store = useAuthStore();
+
+onMounted(() => {
+  store.getAuthToken();
+});
 </script>
 
 <template>
