@@ -1,4 +1,3 @@
-div
 <script setup>
 import { useQuery } from "@tanstack/vue-query";
 import { ref } from "vue";

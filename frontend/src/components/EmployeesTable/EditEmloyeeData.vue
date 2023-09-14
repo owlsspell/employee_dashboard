@@ -1,10 +1,16 @@
 <script setup>
-import { useMutation } from "@tanstack/vue-query";
+import { useMutation, useQuery } from "@tanstack/vue-query";
 import Loading from "../modal/Loading.vue";
-import { editEmployeeData } from "../../api/employees";
+import { editEmployeeData, getCountries } from "../../api/employees";
 
 const props = defineProps(["showModal", "isLoaderShow", "userInfo"]);
 const emit = defineEmits(["close", "setLoaderShow", "refetch"]);
+
+const { data } = useQuery({
+  queryKey: ["countries"],
+  queryFn: () => getCountries(),
+  keepPreviousData: true,
+});
 
 const { isLoading, isError, error, isSuccess, mutate } = useMutation({
   mutationFn: async (employee) => editEmployeeData(employee),
@@ -38,6 +44,7 @@ function saveData(data) {
   />
   <div class="modal" :open="showModal">
     <div class="modal-box pt-12">
+      <h2 class="text-xl font-semibold text-center mb-2">Edit report</h2>
       <button
         class="btn btn-sm btn-circle btn-ghost absolute right-2 top-4"
         @click="$emit('close')"
@@ -64,7 +71,16 @@ function saveData(data) {
         <FormKit label="Gender" name="gender" id="gender" />
         <FormKit label="Job" name="job" id="job" />
         <FormKit label="Company" name="company" id="company" />
-        <FormKit label="Country" name="country" id="country" />
+        <FormKit
+          v-if="data"
+          type="select"
+          label="Country"
+          name="country"
+          id="country"
+          :options="data"
+          placeholder="Select a country"
+          validation="required|country"
+        />
         <div class="modal-action justify-between items-baseline">
           <FormKit
             type="submit"

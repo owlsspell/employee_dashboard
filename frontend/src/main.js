@@ -8,6 +8,7 @@ import { generateClasses } from '@formkit/themes'
 import customTailwindTheme from '../tailwind-theme.js'
 import { createPinia } from 'pinia'
 import { createAuth0 } from '@auth0/auth0-vue';
+// import "@formkit/themes/genesis";
 
 const pinia = createPinia()
 const app = createApp(App)

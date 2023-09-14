@@ -8,9 +8,12 @@ export const getUniqueFields = async (req, res) => {
             by: [req.query.column],
             _count: true,
         })
-        const resultData = result.map((item) => ({ name: item[req.query.column], value: item._count }));
-
-        return res.json(resultData);
+        let maxValue = 0
+        const resultData = result.map((item) => {
+            if (item._count > maxValue) maxValue = item._count
+            return { name: item[req.query.column], value: item._count }
+        });
+        return res.json({ data: resultData, maxValue });
 
     } catch (err) {
         return res.status(404).send(err.message);

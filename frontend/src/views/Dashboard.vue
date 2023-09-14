@@ -1,6 +1,7 @@
 <script setup>
 import ChartLine from "../components/Dashboard/ChartLine.vue";
 import ChartPie from "../components/Dashboard/ChartPie.vue";
+import WorldMap from "../components/Maps/WorldMap.vue";
 </script>
 
 <template>
@@ -8,4 +9,5 @@ import ChartPie from "../components/Dashboard/ChartPie.vue";
     <ChartPie />
     <ChartLine />
   </div>
+  <WorldMap />
 </template>

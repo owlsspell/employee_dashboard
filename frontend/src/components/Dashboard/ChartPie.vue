@@ -10,8 +10,9 @@ import {
   LegendComponent,
 } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, provide } from "vue";
+import { ref, provide, computed, watch } from "vue";
 import Loader from "../global/Loader.vue";
+import { useEmployeesStore } from "../../store/employeesStore";
 
 use([
   CanvasRenderer,
@@ -21,10 +22,17 @@ use([
   LegendComponent,
 ]);
 
+const store = useEmployeesStore();
+
 provide(THEME_KEY, "light");
+
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["countryChart"],
   queryFn: () => getUniqueFields("country"),
+  onSuccess: (data) => {
+    store.updateChartCountryAndValues(data.data);
+    store.updateMaxCountryValue(data.maxValue);
+  },
 });
 
 const option = ref({
@@ -32,8 +40,6 @@ const option = ref({
     text: "Traffic Sources",
     left: "center",
     textStyle: {
-      // color: theme === "dark" ? "#EEF1FA" : "#464646",
-      // color: "inherit",
       fontSize: 18,
       fontWeight: "bold",
     },
@@ -54,7 +60,7 @@ const option = ref({
       type: "pie",
       radius: "55%",
       center: ["50%", "55%"],
-      data: data,
+      data: store.chartCountryAndValues,
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
@@ -65,13 +71,30 @@ const option = ref({
     },
   ],
 });
+
+watch(
+  () => store.chartCountryAndValues,
+  (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      option.value.series[0].data = null;
+      option.value.series[0].data = store.chartCountryAndValues;
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
   <Loader :isLoading="isLoading" />
-  <div class="mx-auto w-full" v-if="data && data.length > 0 && !isLoading">
+  {{
+    console.log(
+      " store.chartCountryAndValues",
+      JSON.parse(JSON.stringify(store.chartCountryAndValues)).length
+    )
+  }}
+  <div class="mx-auto w-full" v-if="!isLoading">
     <Loader :isLoading="isLoading" />
-    <v-chart v-if="!isLoading" class="chart" :option="option" autoresize />
+    <v-chart v-show="!isLoading" class="chart" :option="option" autoresize />
   </div>
 </template>
 

@@ -1,14 +1,10 @@
 import axios from "axios";
 import { base } from "../../config";
-import { useAuth0 } from "@auth0/auth0-vue";
 import { useAuthStore } from "../store/auth";
 
 export const getAllEmployees = async (numberOfNotes, page) => {
-    // const { getAccessTokenSilently } = useAuth0();
 
-    const { token, getAuthToken } = useAuthStore()
-    // if (!token) getAuthToken()
-    // const token = await getAccessTokenSilently();
+    const { token } = useAuthStore()
 
     return await axios.get(base + "employees/get_employees",
         {
@@ -22,6 +18,15 @@ export const getAllEmployees = async (numberOfNotes, page) => {
             }
 
         }).then((response) => response.data)
+}
+export const getCountries = async () => {
+    return await axios.get("https://restcountries.com/v3.1/all?fields=name",
+        {
+            params: {
+                fields: "name"
+            },
+        }).then((response) => response.data.map(item => item.name.common))
+
 }
 
 export const createEmployee = async (newEmployee) => {
@@ -38,7 +43,6 @@ export const createEmployee = async (newEmployee) => {
 
 export const editEmployeeData = async (employee) => {
     const { token } = useAuthStore()
-    console.log(token);
 
     return await axios.post(base + "employees/edit_employee_data", employee, {
         headers: {

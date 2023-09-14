@@ -15,6 +15,7 @@ import { GridComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
 import { useEmployeesStore } from "../../store/employeesStore";
 import { watch } from "vue";
+import { getColumnAndCount } from "../../api/charts";
 
 use([
   CanvasRenderer,
@@ -32,7 +33,10 @@ const store = useEmployeesStore();
 
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["dateChart"],
-  queryFn: () => store.updateLineChartData(),
+  queryFn: () => getColumnAndCount("date"),
+  onSuccess: (data) => {
+    store.updateLineChartData(data);
+  },
 });
 
 const option = ref({

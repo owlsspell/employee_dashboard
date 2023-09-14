@@ -7,7 +7,6 @@ export const useAuthStore = defineStore('auth', () => {
     // const name = ref('Eduardo')
     // const doubleCount = computed(() => count.value * 2)
     async function getAuthToken() {
-        // count.value++
         return getToken().then(data => {
             token.value = data
             return data

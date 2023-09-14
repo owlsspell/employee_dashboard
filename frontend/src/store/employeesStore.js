@@ -1,30 +1,24 @@
 import { defineStore } from 'pinia'
-import { getColumnAndCount } from './../api/charts';
+import { getColumnAndCount, getUniqueFields } from './../api/charts';
 import { ref } from 'vue';
 
 export const useEmployeesStore = defineStore('employees', () => {
     const lineChartData = ref([])
-    // const name = ref('Eduardo')
-    // const doubleCount = computed(() => count.value * 2)
-    async function updateLineChartData() {
-        // count.value++
-        return getColumnAndCount("date").then(data => {
-            lineChartData.value = data.timeArr
-            return lineChartData
-        })
+    const chartCountryAndValues = ref([])
+    const maxCountryValue = ref(0)
+
+    async function updateLineChartData(data) {
+        lineChartData.value = data.timeArr
+        return lineChartData
+    }
+    async function updateChartCountryAndValues(data) {
+        chartCountryAndValues.value = data
+        return chartCountryAndValues
+    }
+    async function updateMaxCountryValue(count) {
+        maxCountryValue.value = count
+        return maxCountryValue
     }
 
-    return { lineChartData, updateLineChartData }
+    return { lineChartData, updateLineChartData, chartCountryAndValues, updateChartCountryAndValues, maxCountryValue, updateMaxCountryValue }
 })
-
-
-// state: () => ({ lineChartData: [], }),
-//     getters: {
-//         doubleCount: (state) => state.count * 2,
-//     },
-//     actions: {
-//         updateLineChartData() {
-//             // this.count++
-//             getColumnAndCount("date").then(data => this.lineChartData = data
-//       },
-//     },
