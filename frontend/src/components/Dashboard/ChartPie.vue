@@ -10,7 +10,7 @@ import {
   LegendComponent,
 } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, provide, computed, watch } from "vue";
+import { ref, provide, watch } from "vue";
 import Loader from "../global/Loader.vue";
 import { useEmployeesStore } from "../../store/employeesStore";
 
@@ -23,7 +23,6 @@ use([
 ]);
 
 const store = useEmployeesStore();
-
 provide(THEME_KEY, "light");
 
 const { isLoading, isError, data, error } = useQuery({
@@ -52,14 +51,13 @@ const option = ref({
     orient: "horizontal",
     left: "left",
     top: "40px",
-    // data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"],
   },
   series: [
     {
       name: "Traffic Sources",
       type: "pie",
       radius: "55%",
-      center: ["50%", "55%"],
+      center: ["50%", "65%"],
       data: store.chartCountryAndValues,
       emphasis: {
         itemStyle: {
@@ -86,12 +84,6 @@ watch(
 
 <template>
   <Loader :isLoading="isLoading" />
-  {{
-    console.log(
-      " store.chartCountryAndValues",
-      JSON.parse(JSON.stringify(store.chartCountryAndValues)).length
-    )
-  }}
   <div class="mx-auto w-full" v-if="!isLoading">
     <Loader :isLoading="isLoading" />
     <v-chart v-show="!isLoading" class="chart" :option="option" autoresize />
@@ -101,5 +93,6 @@ watch(
 <style scoped>
 .chart {
   height: 100vh;
+  max-height: 530px;
 }
 </style>

@@ -9,8 +9,7 @@ import {
   MenuItems,
 } from "@headlessui/vue";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
-import LayoutHeader from "./LayoutHeader.vue";
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { themeChange } from "theme-change";
 import { useAuth0 } from "@auth0/auth0-vue";
 

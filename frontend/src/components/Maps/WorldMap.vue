@@ -57,6 +57,7 @@ const option = shallowRef({
     trigger: "item",
   },
   visualMap: {
+    orient: "horizontal",
     left: "right",
     min: 1,
     max: store.maxCountryValue,
@@ -109,13 +110,14 @@ watch(
 
 <template>
   <Loader :isLoading="dataLength === 0" />
-  <div class="mx-auto w-full h-screen" v-if="dataLength > 0">
+  <div class="mx-auto w-full h-[600px]" v-if="dataLength > 0">
     <v-chart ref="map" class="chart" :option="option" autoresize />
   </div>
 </template>
 
 <style scoped>
 .chart {
-  height: 100vh;
+  height: 100%;
+  max-height: 530px;
 }
 </style>

@@ -94,7 +94,7 @@ watch(
 
 <template>
   <Loader :isLoading="isLoading" />
-  <div class="mx-auto w-full h-screen" v-if="!isLoading">
+  <div class="mx-auto w-full h-full" v-if="!isLoading">
     <v-chart :option="option" autoresize />
   </div>
 </template>
