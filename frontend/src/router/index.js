@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Reports from '../views/Reports.vue'
+import Homepage from '../views/Homepage.vue'
 
 const routes = [
     {
         path: '/',
-        name: 'Dashboard',
-        component: Dashboard
+        name: 'Home',
+        component: Homepage
     },
     {
         path: '/reports',
@@ -17,6 +18,11 @@ const routes = [
         // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
         component: Reports
 
+    },
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: Dashboard
     }
 ]
 const router = createRouter({
