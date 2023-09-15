@@ -9,10 +9,11 @@ import {
   TooltipComponent,
   LegendComponent,
 } from "echarts/components";
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, provide, watch } from "vue";
+import VChart from "vue-echarts";
+import { ref, watch, onUpdated } from "vue";
 import Loader from "../global/Loader.vue";
 import { useEmployeesStore } from "../../store/employeesStore";
+import { useThemeStore } from "../../store/theme";
 
 use([
   CanvasRenderer,
@@ -23,7 +24,7 @@ use([
 ]);
 
 const store = useEmployeesStore();
-provide(THEME_KEY, "light");
+const storeTheme = useThemeStore();
 
 const { isLoading, isError, data, error } = useQuery({
   queryKey: ["countryChart"],
@@ -34,7 +35,11 @@ const { isLoading, isError, data, error } = useQuery({
   },
 });
 
+const darkMode = ref(false);
+const textColor = ref(true);
+
 const option = ref({
+  darkMode,
   title: {
     text: "Traffic Sources",
     left: "center",
@@ -48,6 +53,9 @@ const option = ref({
     formatter: "{a} <br/>{b} : {c} ({d}%)",
   },
   legend: {
+    textStyle: {
+      color: textColor,
+    },
     orient: "horizontal",
     left: "left",
     top: "40px",
@@ -69,7 +77,14 @@ const option = ref({
     },
   ],
 });
-
+onUpdated(() => {
+  storeTheme.theme === "light"
+    ? (darkMode.value = false)
+    : (darkMode.value = true);
+  storeTheme.theme === "light"
+    ? (textColor.value = "#464646")
+    : (textColor.value = true);
+});
 watch(
   () => store.chartCountryAndValues,
   (newValue, oldValue) => {
@@ -86,7 +101,13 @@ watch(
   <Loader :isLoading="isLoading" />
   <div class="mx-auto w-full" v-if="!isLoading">
     <Loader :isLoading="isLoading" />
-    <v-chart v-show="!isLoading" class="chart" :option="option" autoresize />
+    <v-chart
+      v-show="!isLoading"
+      class="chart"
+      :option="option"
+      autoresize
+      :key="storeTheme.theme"
+    />
   </div>
 </template>
 

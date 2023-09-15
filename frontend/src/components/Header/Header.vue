@@ -5,13 +5,17 @@ import {
   DisclosurePanel,
   Menu,
   MenuButton,
-  MenuItem,
   MenuItems,
 } from "@headlessui/vue";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { onMounted } from "vue";
 import { themeChange } from "theme-change";
 import { useAuth0 } from "@auth0/auth0-vue";
+
+defineProps({
+  theme: String,
+});
+defineEmits(["click"]);
 
 onMounted(() => {
   console.log(`the component is now mounted.`);
@@ -93,7 +97,9 @@ function logoutUser() {
                   className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box"
                 >
                   <li v-for="color in themes" v-once>
-                    <a :data-set-theme="color"> {{ color }}</a>
+                    <a :data-set-theme="color" @click="$emit('click', color)">
+                      {{ color }}</a
+                    >
                   </li>
                 </ul>
               </div>

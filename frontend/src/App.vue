@@ -6,9 +6,12 @@ import LayoutHeader from "./components/Header/LayoutHeader.vue";
 import router from "./router";
 import { useAuthStore } from "./store/auth";
 import { onMounted } from "vue";
+import { useThemeStore } from "./store/theme";
 
 console.log("MODE", import.meta.env.MODE);
 const store = useAuthStore();
+
+const { theme, toogleTheme } = useThemeStore();
 
 onMounted(() => {
   store.getAuthToken();
@@ -26,7 +29,7 @@ onMounted(() => {
   </div> -->
 
   <!-- <HelloWorld msg="Vite + Vue" /> -->
-  <Header />
+  <Header :theme="theme" @click="(val) => toogleTheme(val)" />
   <LayoutHeader :title="router.currentRoute.value.name" />
 
   <router-view />

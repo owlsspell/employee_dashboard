@@ -8,8 +8,8 @@ import {
   TooltipComponent,
   LegendComponent,
 } from "echarts/components";
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, provide } from "vue";
+import VChart from "vue-echarts";
+import { ref } from "vue";
 import Loader from "../global/Loader.vue";
 import { GridComponent } from "echarts/components";
 import { DataZoomComponent } from "echarts/components";
@@ -26,8 +26,6 @@ use([
   LegendComponent,
   DataZoomComponent,
 ]);
-
-provide(THEME_KEY, "light");
 
 const store = useEmployeesStore();
 
