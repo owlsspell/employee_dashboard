@@ -20,9 +20,9 @@ onMounted(() => {
 <template>
   <Header :theme="theme" @click="(val) => toogleTheme(val)" />
   <LayoutHeader :title="router.currentRoute.value.name" />
-
-  <router-view />
-
+  <div class="min-h-screen">
+    <router-view />
+  </div>
   <LayoutFooter />
 </template>
 
