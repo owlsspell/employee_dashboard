@@ -1,32 +1,63 @@
 <script setup>
 import Card from "./Card.vue";
+import image1 from "/images/technologies/1.jpg";
+import image2 from "/images/technologies/2.png";
+import image3 from "/images/technologies/3.jpg";
+import image4 from "/images/technologies/4.jpg";
+import image5 from "/images/technologies/5.jpg";
+import image6 from "/images/technologies/6.jpg";
+
+const cards = [
+  { id: 1, name: "HTML & CSS", src: image1, text: "Bootstrap, mui, tailwind" },
+  {
+    id: 2,
+    name: "Responsive web design",
+    src: image2,
+    text: "Adaptive design for all screens",
+  },
+  {
+    id: 3,
+    name: "RESTful API",
+    src: image3,
+    text: "",
+  },
+  {
+    id: 4,
+    name: "Frontend",
+    src: image4,
+    text: "JavaScript: React framework, Next.js, Vue.js",
+  },
+  {
+    id: 5,
+    name: "Backend",
+    src: image5,
+    text: "Node.js, Express.js framework",
+  },
+  {
+    id: 6,
+    name: "Databases",
+    src: image6,
+    text: "PostgreSQL, MongoDB",
+  },
+];
 </script>
 
 <template>
-  <div class="flex justify-center flex-wrap my-4">
-    <Card
-      dataImage="https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop="
-    >
-      <template #header>
-        <h1>Canyons</h1>
-      </template>
-      <template #content>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        </p></template
-      >
-    </Card>
-    <Card
-      dataImage="https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop="
-    >
-      <template #header>
-        <h1>Beaches</h1>
-      </template>
-      <template #content>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        </p></template
-      >
-    </Card>
+  <div class="max-w-screen-lg mx-auto">
+    <h1 class="flex justify-center mt-6 text-2xl font-semibold">
+      Technologies
+    </h1>
+    <div class="flex justify-center flex-wrap my-4">
+      <Card v-for="card in cards" :dataImage="card.src">
+        <template #header>
+          <h3>{{ card.name }}</h3>
+        </template>
+        <template #content>
+          <p>
+            {{ card.text }}
+          </p></template
+        >
+      </Card>
+    </div>
   </div>
 </template>

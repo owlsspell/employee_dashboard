@@ -87,7 +87,7 @@ function handleMouseLeave() {
 }
 
 .card-wrap {
-  margin: 10px;
+  margin: 20px;
   transform: perspective(800px);
   transform-style: preserve-3d;
   cursor: pointer;
@@ -123,7 +123,7 @@ function handleMouseLeave() {
   position: relative;
   flex: 0 0 240px;
   width: 240px;
-  height: 320px;
+  height: 240px;
   background-color: #333;
   overflow: hidden;
   border-radius: 10px;
@@ -136,10 +136,10 @@ function handleMouseLeave() {
 }
 
 .card-bg {
-  opacity: 0.5;
+  opacity: 0.6;
   position: absolute;
-  /* top: -20px;
-  left: -20px; */
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -161,7 +161,9 @@ function handleMouseLeave() {
   color: #fff;
   transform: translateY(40%);
   transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-bottom: 20px;
 }
+
 .card-info p {
   opacity: 0;
   text-shadow: #000 0 2px 3px;
@@ -188,10 +190,10 @@ function handleMouseLeave() {
   transition: 5s 1s v-bind("returnEasing");
 }
 
-.card-info h1 {
+.card-info h3 {
   font-family: "Playfair Display";
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 700;
-  text-shadow: rgba(black, 0.5) 0 10px 10px;
+  text-shadow: #0000005a 0 10px 10px;
 }
 </style>

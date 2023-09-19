@@ -36,6 +36,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+* {
+  font-family: "Josefin Sans", sans-serif;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
