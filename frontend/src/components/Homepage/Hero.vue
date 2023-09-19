@@ -4,7 +4,7 @@ import bg from "/images/bg/bg-1.jpg";
 
 <template>
   <div
-    class="hero min-h-screen bg-fixed bg-center bg-cover"
+    class="hero min-h-[600px] bg-fixed bg-center bg-cover"
     :style="{ 'background-image': `url(${bg})` }"
   >
     <div class="hero-overlay"></div>

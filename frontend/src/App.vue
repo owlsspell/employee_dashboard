@@ -18,18 +18,27 @@ onMounted(() => {
 </script>
 
 <template>
-  <Header :theme="theme" @click="(val) => toogleTheme(val)" />
-  <LayoutHeader :title="router.currentRoute.value.name" />
-  <div class="min-h-screen">
+  <div class="content">
+    <Header :theme="theme" @click="(val) => toogleTheme(val)" />
+    <LayoutHeader :title="router.currentRoute.value.name" />
     <router-view />
   </div>
-  <LayoutFooter />
+  <div class="footer">
+    <LayoutFooter />
+  </div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 * {
   font-family: "Josefin Sans", sans-serif;
+}
+
+.content {
+  min-height: calc(100vh - 70px);
+}
+.footer {
+  height: 100%;
 }
 
 .logo {
