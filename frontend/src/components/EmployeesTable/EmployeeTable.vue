@@ -95,7 +95,7 @@ function setLoaderShow(val) {
           </tbody>
         </table>
       </div>
-      <div class="flex justify-center mt-3">
+      <div class="flex justify-center mt-4">
         <div
           v-if="pageNumber && data && data.employees.length > 0 && !isLoading"
         >
