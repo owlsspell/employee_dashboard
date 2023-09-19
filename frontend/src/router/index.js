@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Dashboard from '../views/Dashboard.vue'
-import Reports from '../views/Reports.vue'
+import { defineAsyncComponent } from "vue";
 import Homepage from '../views/Homepage.vue'
+
 
 const routes = [
     {
@@ -12,17 +12,12 @@ const routes = [
     {
         path: '/reports',
         name: 'Reports',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-        component: Reports
-
+        component: defineAsyncComponent(() => import('../views/Reports.vue'))
     },
     {
         path: '/dashboard',
         name: 'Dashboard',
-        component: Dashboard
+        component: defineAsyncComponent(() => import('../views/Dashboard.vue'))
     }
 ]
 const router = createRouter({

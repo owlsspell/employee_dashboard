@@ -4,8 +4,8 @@ import ChartPie from "../components/Dashboard/ChartPie.vue";
 import WorldMap from "../components/Maps/WorldMap.vue";
 </script>
 
-<template class="bg-base-200">
-  <div class="h-full grid grid-cols-1 gap-4 m-5 md:grid-cols-2 max-h-[600px]">
+<template>
+  <div class="h-full grid grid-cols-1 gap-4 m-5 md:grid-cols-2">
     <div
       class="p-4 border border-base-300 rounded-lg shadow-md col-span-1 sm:p-6 h-[600px] shadow-lg"
     >

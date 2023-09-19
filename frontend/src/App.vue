@@ -1,8 +1,7 @@
 <script setup>
 import Header from "./components/Header/Header.vue";
-// import HelloWorld from "./components/HelloWorld.vue";
-import EmployeeTable from "./components/EmployeesTable/EmployeeTable.vue";
 import LayoutHeader from "./components/Header/LayoutHeader.vue";
+import LayoutFooter from "./components/Footer/LayoutFooter.vue";
 import router from "./router";
 import { useAuthStore } from "./store/auth";
 import { onMounted } from "vue";
@@ -19,20 +18,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div> -->
-
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
   <Header :theme="theme" @click="(val) => toogleTheme(val)" />
   <LayoutHeader :title="router.currentRoute.value.name" />
 
   <router-view />
+
+  <LayoutFooter />
 </template>
 
 <style scoped>

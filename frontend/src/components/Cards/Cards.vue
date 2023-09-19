@@ -43,7 +43,7 @@ const cards = [
 </script>
 
 <template>
-  <div class="max-w-screen-lg mx-auto">
+  <div class="max-w-screen-lg mx-auto my-20">
     <h1 class="flex justify-center mt-6 text-2xl font-semibold">
       Technologies
     </h1>
